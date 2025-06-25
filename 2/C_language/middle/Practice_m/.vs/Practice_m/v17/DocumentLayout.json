@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\jooyoungiili\\\uB3D9\uAD6D\\dongguk_univ\\2\uD559\uB144\\\uAE30\uCD08\uD504\uB85C\uADF8\uB798\uBC0D_C\\\uC911\uAC04\uACE0\uC0AC \uC900\uBE44\\Practice_m\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C56EBA18-F64B-4406-9C6C-06CEDBD4F03A}|Practice_m\\Practice_m.vcxproj|C:\\jooyoungiili\\\uB3D9\uAD6D\\dongguk_univ\\2\uD559\uB144\\\uAE30\uCD08\uD504\uB85C\uADF8\uB798\uBC0D_C\\\uC911\uAC04\uACE0\uC0AC \uC900\uBE44\\Practice_m\\Practice_m\\TASK.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C56EBA18-F64B-4406-9C6C-06CEDBD4F03A}|Practice_m\\Practice_m.vcxproj|solutionrelative:Practice_m\\TASK.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C56EBA18-F64B-4406-9C6C-06CEDBD4F03A}|Practice_m\\Practice_m.vcxproj|C:\\jooyoungiili\\\uB3D9\uAD6D\\dongguk_univ\\2\uD559\uB144\\\uAE30\uCD08\uD504\uB85C\uADF8\uB798\uBC0D_C\\\uC911\uAC04\uACE0\uC0AC \uC900\uBE44\\Practice_m\\Practice_m\\bit.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C56EBA18-F64B-4406-9C6C-06CEDBD4F03A}|Practice_m\\Practice_m.vcxproj|solutionrelative:Practice_m\\bit.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "TASK.c",
+              "DocumentMoniker": "C:\\jooyoungiili\\\uB3D9\uAD6D\\dongguk_univ\\2\uD559\uB144\\\uAE30\uCD08\uD504\uB85C\uADF8\uB798\uBC0D_C\\\uC911\uAC04\uACE0\uC0AC \uC900\uBE44\\Practice_m\\Practice_m\\TASK.c",
+              "RelativeDocumentMoniker": "Practice_m\\TASK.c",
+              "ToolTip": "C:\\jooyoungiili\\\uB3D9\uAD6D\\dongguk_univ\\2\uD559\uB144\\\uAE30\uCD08\uD504\uB85C\uADF8\uB798\uBC0D_C\\\uC911\uAC04\uACE0\uC0AC \uC900\uBE44\\Practice_m\\Practice_m\\TASK.c*",
+              "RelativeToolTip": "Practice_m\\TASK.c*",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAkwCAAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2025-04-09T05:47:02.717Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "bit.c",
+              "DocumentMoniker": "C:\\jooyoungiili\\\uB3D9\uAD6D\\dongguk_univ\\2\uD559\uB144\\\uAE30\uCD08\uD504\uB85C\uADF8\uB798\uBC0D_C\\\uC911\uAC04\uACE0\uC0AC \uC900\uBE44\\Practice_m\\Practice_m\\bit.c",
+              "RelativeDocumentMoniker": "Practice_m\\bit.c",
+              "ToolTip": "C:\\jooyoungiili\\\uB3D9\uAD6D\\dongguk_univ\\2\uD559\uB144\\\uAE30\uCD08\uD504\uB85C\uADF8\uB798\uBC0D_C\\\uC911\uAC04\uACE0\uC0AC \uC900\uBE44\\Practice_m\\Practice_m\\bit.c",
+              "RelativeToolTip": "Practice_m\\bit.c",
+              "ViewState": "AgIAAFEAAAAAAAAAAAAAAGEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2025-04-09T05:24:20.259Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

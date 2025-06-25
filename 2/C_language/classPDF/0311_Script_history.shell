@@ -1,0 +1,58 @@
+/*
+    1 echo hello
+    2  echo dongguk
+    3  exit
+    4  ll
+    5  pwd
+    6  wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+    7  bash miniconda.sh -b -p $HOME/miniconda
+    8  $HOME/miniconda/bin/conda init
+    9  source ~/.bashrc  # or source ~/.zshrc if using Zsh
+   10  conda --version
+   11  conda create -n jooZero python=3.9
+   12  conda activate jooZero
+   13  conda install -c conda-forge tmux
+   14  tmux
+   15  tmux ls
+   16  tmux
+   17  tmux attach
+   18  tmux
+   19  ll
+   20  tmax
+   21  tmux
+   22  conda activate jooZero
+   23  tmux
+   24  mtux
+   25  tmux
+   26  tmux ls
+   27  tmux
+   28  tmux 1
+   29  tmux
+   30  tmux ls
+   31  tmux
+   32  tmux ls
+   33  ll
+   34  mkdir Mar11
+   35  cd Mar11/
+   36  ll
+   37  vi Hello.c
+   38  gcc Hello.c
+   39  vi Hello.c
+   40  gcc Hello.c
+   41  ll
+   42  ./a.out
+   43  vi Hello.c
+   44  gcc Hello.c
+   45  ./a.out
+   46  ll
+   47  vi Hello.c
+   48  gcc Hello.c
+   49  ./a.out
+   50  ll
+   51  vi Hello.c
+   52  gcc Hello.c
+   53  ./a.out
+   54  history
+
+
+*/
