@@ -1,0 +1,132 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define ROWS 11
+#define COLS 10
+
+typedef struct TreeNode {
+    int row, col;
+    struct TreeNode *left, *right;  
+} TreeNode;
+
+int maze[ROWS][COLS] = {
+    {1, 1, 1, 1, 1, 1, 1, 1, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 1, 0, 1},
+    {1, 0, 1, 1, 1, 1, 1, 1, 0, 1},
+    {1, 0, 1, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 1, 0, 1, 1, 1, 1, 1, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 1, 1, 1, 1, 0, 1, 0, 1},
+    {1, 0, 1, 0, 0, 1, 0, 1, 0, 1},
+    {1, 1, 1, 0, 1, 1, 0, 1, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 1, 0, 1},
+    {1, 1, 1, 1, 1, 1, 1, 1, 0, 1}
+};
+
+int visited[ROWS][COLS] = {0};
+
+//오른쪽, 왼쪽, 아래, 위
+int dr[4] = {0,  0, 1, -1};
+int dc[4] = {1, -1, 0,  0};
+
+int is_valid(int r, int c) {
+    return (r >= 0 && r < ROWS && c >= 0 && c < COLS &&
+            maze[r][c] == 0 && !visited[r][c]);
+}
+
+TreeNode* create_node(int r, int c) {
+    TreeNode* node = (TreeNode*)malloc(sizeof(TreeNode));
+    node->row = r;
+    node->col = c;
+    node->left = NULL;
+    node->right = NULL;
+    return node;
+}
+
+// 미로 상태 출력 함수
+void print_maze(int curR, int curC, int endR, int endC) {
+    printf("\n");
+    for (int r = 0; r < ROWS; r++) {
+        for (int c = 0; c < COLS; c++) {
+            if (r == curR && c == curC) printf("C ");
+            else if (r == endR && c == endC) printf("X ");
+            else if (maze[r][c] == 1) printf("# ");
+            else if (maze[r][c] == 2) printf(". ");
+            else printf("0 ");
+        }
+        printf("\n");
+    }
+    printf("\n");
+}
+
+int root_printed = 0; // 루트 노드 출력 위함
+
+TreeNode* build_tree(int r, int c) {
+    visited[r][c] = 1;
+    TreeNode* root = create_node(r, c);
+    TreeNode* prev = NULL;
+
+    if (!root_printed) {
+        printf("Root node: (%d, %d)\n", r, c);
+        root_printed = 1;
+    }
+
+    for (int i = 0; i < 4; i++) {
+        int nr = r + dr[i];
+        int nc = c + dc[i];
+
+        if (is_valid(nr, nc)) {
+            TreeNode* child = build_tree(nr, nc);
+
+            if (!root->left) {
+                root->left = child;
+                printf("Adding Node: (%d, %d) as a left child of node: (%d, %d)\n",
+                       nr, nc, r, c);
+            } else {
+                prev->right = child;
+                printf("Adding Node: (%d, %d) as a right child of node: (%d, %d)\n",
+                       nr, nc, r, c);
+            }
+            prev = child;
+        }
+    }
+
+    printf("\n");
+
+    return root;
+}
+
+// 미로 경로 탐색 (트리 전위 순회)
+int find_path(TreeNode* node, int endR, int endC) {
+    if (!node) return 0;
+
+    if (maze[node->row][node->col] == 0)
+        maze[node->row][node->col] = 2;   // 방문 표시 -> '.'
+
+    printf("Current position: (%d, %d)", node->row, node->col);
+    print_maze(node->row, node->col, endR, endC);
+    
+
+    if (node->row == endR && node->col == endC) {
+        return 1;
+    }
+
+    if (find_path(node->left, endR, endC)) return 1;
+    if (find_path(node->right, endR, endC)) return 1;
+
+    return 0;
+}
+
+int main(void) {
+    int startR = 0, startC = 8;   // (0, 8)
+    int endR   = 10, endC = 8;    // (10, 8)
+
+    printf("트리 변환\n");
+    TreeNode* root = build_tree(startR, startC);
+
+    printf("\n미로 탐색 시작\n");
+    if (!find_path(root, endR, endC))
+        printf("NO path found\n");
+
+    return 0;
+}
