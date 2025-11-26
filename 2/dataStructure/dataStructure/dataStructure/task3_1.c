@@ -3,14 +3,16 @@
 #include<stdlib.h>
 #include<time.h>
 #include<string.h>
-#define N 100000
+int N;
 #define swap(x,y,t) ((t)=(x),(x)=(y),(y)=(t))
+
 typedef struct {
     char* str;
     int i_n_i;
 }element;
-element randarr[N];
-element S_TEMP;
+
+element *randarr; 
+
 
 double Time_d[5];
 long long Compare_d[5];
@@ -34,24 +36,53 @@ void Merge_Sort_Func(element arr[], element tmp[], int l, int r);
 void Heap_Sort(element arr[]);
 void Heap_Sort_Func(element arr[]);
 
-int main(void) {
+int main(int argc, char *argv[]) {
+    
+    if (argc != 2) {
+        printf("Usage: %s <N>\n", argv[0]);
+        printf("Example: %s 100000\n", argv[0]);
+        return 1;
+    }
+    N = atoi(argv[1]);
+    if (N <= 0) {
+        printf("N must be a positive integer.\n");
+        return 1;
+    }
+
+   
+    randarr = malloc(sizeof(element) * N);
+    if (randarr == NULL) {
+        printf("Memory allocation failed for randarr (N=%d).\n", N);
+        return 1;
+    }
+
     srand((unsigned)time(NULL));
     rand_char();
     printf("Number of Instances: %d\n", N);
+    
+    
     setting_arr(randarr, randarr);
     Bubble_Sort(randarr);
+    
+   
     setting_arr(randarr, randarr);
     Insert_Sort(randarr);
+    
+    
     setting_arr(randarr, randarr);
     Quick_Sort(randarr);
+    
+    
     setting_arr(randarr, randarr);
     Merge_Sort(randarr);
+    
+    
     setting_arr(randarr, randarr);
     Heap_Sort(randarr);
 
 
     printf("====Sorting Result Summary ===\n");
-    printf("Algorithm    | Tims(s)     | Compare            | Swap                  | Stable\n");
+    printf("Algorithm     | Tims(s)   | Compare             | Swap                 | Stable\n");
     printf("--------------------------------------------------------------------------\n");
     for (int i = 0; i < 5; i++) {
         printf("%-13s", Name_Data[i]);
@@ -63,10 +94,12 @@ int main(void) {
     }
 
     for (int i = 0; i < N; i++)free(randarr[i].str);
+    free(randarr); 
+    return 0;
 }
 
 void Heap_Sort(element arr[]){
-    FILE* fp = fopen("heap_sort.out", "w");//ÀÔÃâ·Â?
+    FILE* fp = fopen("heap_sort.out", "w");
     printf("=> Starting - Heap Sort\n");
     clock_t s, f;
     double dur;
@@ -85,14 +118,21 @@ void Heap_Sort(element arr[]){
     printf("=> Created - heap_sort.out\n");
     stable[4] = check_stable(arr);
 }
+
 void Heap_Sort_Func(element arr[]) {
-    element heap[N + 1];
+    
+    element *heap = malloc(sizeof(element) * (N + 1));
+    if (heap == NULL) return; 
+
+    element S_TEMP; 
+    
     int i_n_i = 1;
+    
     for (int i = 0; i < N; i++) {
         heap[i_n_i] = arr[i];
         for (int j = i_n_i; j / 2 > 0; j /= 2) {
             Compare_d[4]++;
-           
+            
             if (strcmp(heap[j].str, heap[j / 2].str) < 0 || (strcmp(heap[j].str, heap[j / 2].str) == 0 && heap[j].i_n_i < heap[j / 2].i_n_i)){
                 swap(heap[j], heap[j / 2], S_TEMP);
                 Swap_d[4]++;
@@ -101,10 +141,12 @@ void Heap_Sort_Func(element arr[]) {
         }
         i_n_i++;
     }
+    
+    
     for (int i = 0; i < N; i++) {
         arr[i] = heap[1];
         swap(heap[1], heap[i_n_i - 1], S_TEMP);
-        Compare_d[4]++;
+        
         Swap_d[4]++;
         i_n_i--;
 
@@ -127,7 +169,9 @@ void Heap_Sort_Func(element arr[]) {
             else break;
         }
     }
+    free(heap); 
 }
+
 void Merge_Sort_Func(element arr[], element tmp[], int l, int r) {
     if (l >= r)return;
 
@@ -144,32 +188,28 @@ void Merge_Sort_Func(element arr[], element tmp[], int l, int r) {
     while (lower <= mid && upper <= r) {
         if (strcmp(arr[lower].str, arr[upper].str) <= 0) {
             Compare_d[3]++;
-            Swap_d[3]++;
             tmp[i_n_i] = arr[lower];
             lower++;
         }
         else {
             Compare_d[3]++;
-            Swap_d[3]++;
             tmp[i_n_i] = arr[upper];
             upper++;
         }
         i_n_i++;
     }
+    
     for (; lower <= mid; lower++) {
-        Compare_d[3]++;
-        Swap_d[3]++;
         tmp[i_n_i] = arr[lower];
         i_n_i++;
     }
     for (; upper <= r; upper++) {
-        Compare_d[3]++;
-        Swap_d[3]++;
         tmp[i_n_i] = arr[upper];
         i_n_i++;
     }
     for (i_n_i = 0; l + i_n_i <= r; i_n_i++) {
         arr[l + i_n_i] = tmp[i_n_i];
+        Swap_d[3]++; 
     }
 
 }
@@ -179,8 +219,19 @@ void Merge_Sort(element arr[]){
     clock_t s, f;
     double dur;
     s = clock();
-    element tmp[N];
+    
+  
+    element *tmp = malloc(sizeof(element) * N);
+    if (tmp == NULL) {
+        printf("Memory allocation failed for tmp in Merge Sort.\n");
+        fclose(fp);
+        return;
+    }
+    
     Merge_Sort_Func(arr, tmp, 0, N - 1);
+    
+    free(tmp);
+    
     for (int i = 0; i < N; i++) {
         fprintf(fp, "%s ", arr[i].str);
     }
@@ -195,6 +246,8 @@ void Merge_Sort(element arr[]){
 }
 void Quick_Sort_Func(element arr[], int l, int r) {
     if (l >= r)return;
+    element S_TEMP; 
+
     int lower, upper;
     lower = l;
     upper = r + 1;
@@ -206,7 +259,7 @@ void Quick_Sort_Func(element arr[], int l, int r) {
             lower++;
         }
         upper--;
-       
+        
         while ((upper >= l + 1) && (strcmp(arr[upper].str, arr[l].str) > 0 || (strcmp(arr[upper].str, arr[l].str) == 0 && arr[upper].i_n_i >= arr[l].i_n_i))) {
             Compare_d[2]++;
             upper--;
@@ -255,7 +308,7 @@ void Insert_Sort_Func(element arr[]) {
             else break;
         }
         arr[j + 1] = key;
-        Swap_d[1]++;
+        Swap_d[1]++; 
     }
 }
 void Insert_Sort(element arr[]){
@@ -279,6 +332,7 @@ void Insert_Sort(element arr[]){
     stable[1] = check_stable(arr);
 }
 void Bubble_Sort_Func(element arr[]) {
+    element S_TEMP; 
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N - i - 1; j++) {
             Compare_d[0]++;
@@ -313,7 +367,13 @@ void Bubble_Sort(element arr[]) {
 void rand_char(void) {
     for (int i = 0; i < N; i++) {
         int l = rand() % 20 + 1;
+      
         randarr[i].str = malloc(sizeof(char) * (l + 1));
+        if (randarr[i].str == NULL) {
+           
+            fprintf(stderr, "Error: Memory allocation failed in rand_char.\n");
+            exit(1); 
+        }
 
         int j = 0;
         char tmp[100];
@@ -338,8 +398,15 @@ int check_stable(element arr[])
     return 1;
 }
 void setting_arr(element x[], element y[]) {
-    element tmp[N];
+    
+    element *tmp = malloc(sizeof(element) * N);
+    if (tmp == NULL) {
+        printf("Memory allocation failed for tmp in setting_arr.\n");
+        return;
+    }
     Setting_Merge_Sort_Func(x, tmp, 0, N - 1);
+    
+    free(tmp); 
 }
 void Setting_Merge_Sort_Func(element arr[], element tmp[], int l, int r) {
     if (l >= r)return;
@@ -355,7 +422,7 @@ void Setting_Merge_Sort_Func(element arr[], element tmp[], int l, int r) {
 
 
     while (lower <= mid && upper <= r) {
-        if (arr[lower].i_n_i< arr[upper].i_n_i) {
+        if (arr[lower].i_n_i< arr[upper].i_n_i) { 
             tmp[i_n_i] = arr[lower];
             lower++;
         }
